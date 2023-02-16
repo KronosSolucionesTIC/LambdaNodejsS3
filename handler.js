@@ -11,7 +11,7 @@ const multerS3 = require('multer-s3')
 const upload = multer({
   storage: multerS3({
     s3,
-    acl: 'public-read',
+    //acl: 'public-read',
     bucket: process.env.bucket,
     key: (req, file, cb) => {
       const fileExtension = file.originalname.split('.')[1]
@@ -23,7 +23,7 @@ const upload = multer({
 app.post('/upload', (req, res) => {
   upload(req, res, (err) => {
     if (err) {
-      res.send('Error', err).status(500)
+      res.send(err).status(500)
     } else {
       res.send('Archivo subido correctamente').status(200)
     }
